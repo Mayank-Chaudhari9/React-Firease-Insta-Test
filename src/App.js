@@ -60,6 +60,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+  const [openSignIn, setOpenSignIn] = useState(false);
 
   useEffect(() => {
     // if any change in authentication state (login/logout)
@@ -116,12 +117,21 @@ function App() {
           displayName: username
         })
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => alert(error.message));
+    setOpen(false);
   }
 
+  const signIn = (event) => {
+    event.preventDefault();
+    auth.signInWithEmailAndPassword(email, password)
+      .catch((error) => alert(error.message));
+
+    setOpenSignIn(false);
+  }
 
   return (
     <div className="App">
+
       <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -162,7 +172,40 @@ function App() {
           </form>
         </div>
       </Modal>
+      <Modal
+        open={openSignIn}
+        onClose={() => setOpenSignIn(false)}
 
+      >
+        <div style={modalStyle} className={classes.paper}>
+          <form className="app__signup">
+            <center>
+              <img
+                className="app__headerImage"
+                src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+                alt=""
+              />
+            </center>
+
+            <Input
+              placeholder="email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <Input
+              placeholder="password"
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <Button type="submit" onClick={signIn}>Sign In</Button>
+
+          </form>
+        </div>
+      </Modal>
       <div className="app__header">
         <img
           className="app__headerImage"
@@ -170,12 +213,12 @@ function App() {
           alt=""
         />
       </div>
-      {user ? (
+      {user ? (  //conditional rendering here
         <Button onClick={() => auth.signOut()}>Logout</Button>
       ) : (
           // all this will be available once we are  not logged in
           <div className="app__loginContainer">
-
+            <Button onClick={() => setOpenSignIn(true)}> Sign In</Button>
             <Button onClick={() => setOpen(true)}> Sign up</Button>
           </div>
         )}
