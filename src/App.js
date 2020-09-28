@@ -3,11 +3,14 @@ import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import Post from './Post'
+import ImageUpload from './ImageUpload'
 import { db, auth } from './firebase'
 import Modal from '@material-ui/core/Modal';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Input } from '@material-ui/core';
+
+
 
 
 
@@ -131,10 +134,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* I wnat to have .. */}
-      {/* Caption input */}
-      {/* File Picker */}
-      {/* Post button */}
+      <ImageUpload />
 
 
       {/* Signup Modal */}
