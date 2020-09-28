@@ -131,7 +131,13 @@ function App() {
 
   return (
     <div className="App">
+      {/* I wnat to have .. */}
+      {/* Caption input */}
+      {/* File Picker */}
+      {/* Post button */}
 
+
+      {/* Signup Modal */}
       <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -172,6 +178,7 @@ function App() {
           </form>
         </div>
       </Modal>
+      {/* LogIn Modal */}
       <Modal
         open={openSignIn}
         onClose={() => setOpenSignIn(false)}
